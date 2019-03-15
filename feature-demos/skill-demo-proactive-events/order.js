@@ -4,12 +4,11 @@ const https = require('https');
 const mode = 'dev'; // or 'prod'
 
 
-const clientID = `amzn1.application-oa2-client.274a50e4....`;
+const clientID = process.env.CLIENT_ID;
 
-const clientSecret = `97a166....`;
+const clientSecret = process.env.CLIENT_SECRET;
 
-let userId1 = `amzn1.ask.account.AHVVDYK7EA.....`;
-
+let userId1 = process.env.USER_ID;
 
 notify(userId1, 'ORDER', 3); // order shipped, arrives in 3 days
 
@@ -24,7 +23,7 @@ async function notify(userId, eventType, message) {
 function getProactiveOptions(token, postLength){
 
     return {
-        hostname: 'api.amazonalexa.com',  // api.eu.amazonalexa.com (Europe) api.fe.amazonalexa.com (Far East)
+        hostname: 'api.fe.amazonalexa.com',  // api.eu.amazonalexa.com (Europe) api.fe.amazonalexa.com (Far East)
         port: 443,
         path: '/v1/proactiveEvents/' + (mode && mode === 'prod' ? '' : 'stages/development'),  // mode: global var
         method: 'POST',
